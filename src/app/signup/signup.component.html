@@ -1,0 +1,42 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="example-container">
+
+    <mat-form-field>
+      <input matInput placeholder="Name (required)" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email (required)" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Username (required)" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password (required)" placeholder="Password" formControlName="password">
+    </mat-form-field>
+
+    <mat-label>Qualifications</mat-label>
+    <mat-form-field>
+      <input matInput type="Passing Year (required)" placeholder="Passing Year" formControlName="password">
+      <input matInput type="College Name (required)" placeholder="College Name" formControlName="password">
+      <input matInput type="Percentage (required)" placeholder="Percentage" formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="dob" formControlName="dob">
+      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+      <mat-datepicker #dob></mat-datepicker>
+    </mat-form-field>
+
+<mat-checkbox formControlName="terms">Agree to terms and conditions*</mat-checkbox>
+
+    <button [disabled]="!signupForm.valid" mat-raised-button color="primary" mat-button style="margin: 5% 0;">Sign In</button>
+  </div>
+</form>
+
+<pre>
+{{signupForm.value | json }}
+</pre>

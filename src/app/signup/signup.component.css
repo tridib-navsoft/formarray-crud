@@ -1,0 +1,12 @@
+h4, p {
+  font-family: Lato;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}

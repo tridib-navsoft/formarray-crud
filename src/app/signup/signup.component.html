@@ -17,12 +17,30 @@
       <input matInput type="password (required)" placeholder="Password" formControlName="password">
     </mat-form-field>
 
-    <mat-label>Qualifications</mat-label>
+<!--     <mat-label>Qualifications</mat-label>
     <mat-form-field>
       <input matInput type="Passing Year (required)" placeholder="Passing Year" formControlName="password">
       <input matInput type="College Name (required)" placeholder="College Name" formControlName="password">
       <input matInput type="Percentage (required)" placeholder="Percentage" formControlName="password">
-    </mat-form-field>
+    </mat-form-field> -->
+
+    <table>
+      <tr formArrayName="qualification" *ngFor="let cd of signupForm.controls.qualification.controls ;let i=index;">
+          <td formGroupName={{i}}>
+              <b>
+Class {{cd.get('Class').value}}
+</b>
+              <input  type="text" formControlName="passingYear" placeholder="Total Student" />
+              <input  type="text" formControlName="collegeName" placeholder="Total Grade A Student" />
+              <input  type="text" formControlName="percentage" placeholder="Total Grade B Student" />
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <input type="submit" value="Click Me" />
+          </td>
+      </tr>
+  </table>
 
     <mat-form-field appearance="fill">
       <mat-label>Choose a date</mat-label>

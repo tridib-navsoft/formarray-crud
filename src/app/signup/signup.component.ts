@@ -18,9 +18,6 @@ export class SignupComponent implements OnInit {
     private appService: AppService) { }
 
   ngOnInit(): void {
-
-    this.getUserList()
-
     this.signupForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       username: ['', [Validators.required]],
@@ -30,42 +27,75 @@ export class SignupComponent implements OnInit {
       qualification: this.formBuilder.array([]),
       terms: ['', [Validators.required]],
     })
+
+    this.getUserList()
   }
 
-  addNewQualificationGroup() {
-    const add = this.signupForm.get('qualification') as FormArray;
-    add.push(this.formBuilder.group({
-      passingYear: [],
-      collegeName: [],
-      percentage: []
-    }))
+  getArray(): FormArray {
+
+    return this.signupForm.get("qualification") as FormArray
+
   }
+
+  pushArray(): FormGroup {
+
+    return this.formBuilder.group({
+      passingYear: '',
+      collegeName: '',
+      percentage: ''
+    })
+
+  }
+
+  addNewQualification() {
+
+    this.getArray().push(this.pushArray());
+
+  }
+
+  removeQualification(i: number) {
+
+    this.getArray().removeAt(i);
+
+  }
+
+  /*   addNewQualificationGroup() {
+     const add = this.signupForm.get('qualification') as FormArray;
+      add.push(this.formBuilder.group({
+        passingYear: [],
+        collegeName: [],
+        percentage: []
+      }))
+    } */
 
   public getUserList = () => {
     this.userList = JSON.parse(localStorage.getItem('userInfo'));
-    /* console.log(this.userList) */
   }
 
 
   public onSubmit = () => {
 
-    let oldValue = JSON.parse(localStorage.getItem('userInfo'));
+    const addUser = JSON.parse(localStorage.getItem('userInfo'));
 
-    if(oldValue && oldValue.length > 0) {
-      oldValue.push(this.signupForm.value)
+    if (addUser && addUser.length > 0) {
+      addUser.push(this.signupForm.value)
       this.toastr.success('User Added Successfully!!', 'Success!!')
+      localStorage.setItem('userInfo', JSON.stringify(addUser));
       this.router.navigate(['/login'])
     } else {
       const user = []
       user.push(this.signupForm.value)
-      oldValue = user
+      this.userList = user
+      this.toastr.success('User Added Successfully!!', 'Success!!')
+      localStorage.setItem('userInfo', JSON.stringify(this.userList));
+      this.router.navigate(['/login'])
     }
 
-    localStorage.setItem('userInfo', JSON.stringify(oldValue));
 
-    /* this.ngOnInit() */
 
-}
+    //this.ngOnInit()
+
+  }
 
 }
 

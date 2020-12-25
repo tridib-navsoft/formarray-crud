@@ -131,6 +131,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sample-task"
+    }
+  },
+  "defaultProject": "sample-task",
+  "cli": {
+    "analytics": "c494858f-d3af-471d-ab1b-d67a24835566"
+  }
 }

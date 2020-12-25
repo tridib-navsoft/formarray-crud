@@ -1,36 +1,38 @@
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-  <div class="example-container">
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="example-container">
 
-    <mat-form-field>
-      <input matInput placeholder="Name (required)" formControlName="name">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Name (required)" formControlName="name">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Email (required)" formControlName="email">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email (required)" formControlName="email">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Username (required)" formControlName="username">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Username (required)" formControlName="username" [readonly]="true">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="password (required)" placeholder="Password" formControlName="password">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password (required)" placeholder="Password" formControlName="password">
+      </mat-form-field>
 
-    <mat-label>Qualifications</mat-label>
+      <mat-label>Qualifications</mat-label>
 
-    <div>
-      <button type="button" (click)="addNewQualificationGroup()">Add</button>
-    </div>
+      <div>
+        <button type="button" (click)="addNewQualification()">Add</button>
+      </div>
 
-    <div *ngFor="let qualificationGroup of editForm.get('qualification')['controls'];let i = index" [formGroup]="qualificationGroup">
+      <div *ngFor="let qualificationGroup of editForm.get('qualification')['controls'];let i = index"
+        [formGroup]="qualificationGroup">
 
-      Qualification No : {{i+1}}
+        Qualification No : {{i+1}}
         <div>
           Passing Year <input formControlName="passingYear">
         </div>
 
-         <div>
+        <div>
           College Name <input formControlName="collegeName">
         </div>
 
@@ -38,28 +40,34 @@
           Percentage <input formControlName="percentage">
         </div>
         <br>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="dob" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+        <mat-datepicker #dob></mat-datepicker>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="terms">Agree to terms and conditions*</mat-checkbox>
+
+      <button type='submit' [disabled]="!editForm.valid" mat-raised-button color="primary" mat-button
+        style="margin: 5% 0;">Edit</button>
     </div>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="dob" formControlName="dob">
-      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
-      <mat-datepicker #dob></mat-datepicker>
-    </mat-form-field>
-
-<mat-checkbox formControlName="terms">Agree to terms and conditions*</mat-checkbox>
-
-    <button type='submit' [disabled]="!editForm.valid" mat-raised-button color="primary" mat-button style="margin: 5% 0;">Edit</button>
-  </div>
-</form>
+  </form>
+</div>
 
 <table *ngFor="let user of userList">
   <tr>
     <th>Username</th>
     <th>Email</th>
+    <th>Edit</th>
   </tr>
   <tr>
-    <td (click) = "onClick(user)">{{user.name}}</td>
+    <td>{{user.name}}</td>
     <td>{{user.email}}</td>
+    <td (click)="onClick(user)"><span class="material-icons" style="cursor: pointer;">
+        create
+      </span></td>
   </tr>
 </table>

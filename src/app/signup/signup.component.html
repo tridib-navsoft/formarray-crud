@@ -1,36 +1,41 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <div class="example-container">
+<div class="container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="example-container">
 
-    <mat-form-field>
-      <input matInput placeholder="Name (required)" formControlName="name">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Name (required)" formControlName="name">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Email (required)" formControlName="email">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email (required)" formControlName="email">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Username (required)" formControlName="username">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Username (required)" formControlName="username">
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="password (required)" placeholder="Password" formControlName="password">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password (required)" placeholder="Password" formControlName="password">
+      </mat-form-field>
 
-    <mat-label>Qualifications</mat-label>
+      <div class="row" style="justify-content: space-around;">
+        <mat-label>Qualifications</mat-label>
 
-    <div>
-      <button type="button" (click)="addNewQualificationGroup()">Add</button>
-    </div>
+        <div>
+          <button type="button" (click)="addNewQualification()">Add</button>
+        </div>
+      </div>
 
-    <div *ngFor="let qualificationGroup of signupForm.get('qualification')['controls'];let i = index" [formGroup]="qualificationGroup">
+      <div class="form__array"
+        *ngFor="let qualificationGroup of signupForm.get('qualification')['controls'];let i = index"
+        [formGroup]="qualificationGroup" style="justify-content: space-around;">
 
-      Qualification No : {{i+1}}
+        Qualification No : {{i+1}}
         <div>
           Passing Year <input formControlName="passingYear">
         </div>
 
-         <div>
+        <div>
           College Name <input formControlName="collegeName">
         </div>
 
@@ -38,22 +43,25 @@
           Percentage <input formControlName="percentage">
         </div>
         <br>
+      </div>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="dob" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+        <mat-datepicker #dob></mat-datepicker>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="terms">Agree to terms and conditions*</mat-checkbox>
+
+      <button type='submit' [disabled]="!signupForm.valid" mat-raised-button color="primary" mat-button
+        style="margin: 5% 0;">Register</button>
     </div>
+  </form>
+</div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="dob" formControlName="dob">
-      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
-      <mat-datepicker #dob></mat-datepicker>
-    </mat-form-field>
-
-<mat-checkbox formControlName="terms">Agree to terms and conditions*</mat-checkbox>
-
-    <button type='submit' [disabled]="!signupForm.valid" mat-raised-button color="primary" mat-button style="margin: 5% 0;">Register</button>
-  </div>
-</form>
-
-<table *ngFor="let user of userList">
+<!-- <table *ngFor="let user of userList">
   <tr>
     <th>Username</th>
     <th>Email</th>
@@ -63,10 +71,10 @@
     <td>{{user.email}}</td>
   </tr>
 </table>
-<br>
+<br> -->
 
 <mat-label>JSON DATA</mat-label>
 <br>
 <pre>
 {{signupForm.value | json }}
-</pre>
+</pre> -->

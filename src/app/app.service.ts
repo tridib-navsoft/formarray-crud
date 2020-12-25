@@ -7,12 +7,13 @@ export class AppService {
 
   constructor() { }
 
-  public getUserInfoFromLocalStorage: any = () => {
-    return JSON.parse(localStorage.getItem('userInfo'));
-  }
 
-  public setUserInfoInLocalStorage: any = (data) => {
-    localStorage.setItem('userInfo', JSON.stringify(data))
-  }
+  /*   public getUserInfoFromLocalStorage: any = () => {
+      return JSON.parse(localStorage.getItem('userInfo'));
+    }
+  
+    public setUserInfoInLocalStorage: any = (data) => {
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    } */
 
 }
